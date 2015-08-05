@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333"
+    tools:context="org.androidtown.shutterwordbook.Fragment.SettingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background_img03"
+
+       >
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/setting_img01"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        >
+
+
+
+        <CheckBox
+            android:id="@+id/checkBox_lockscreen"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="190dp"
+            />
+
+    </LinearLayout>
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:id="@+id/button"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/setting_img02"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="50dp"
+            />
+
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:id="@+id/button2"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/setting_img03"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            />
+
+    </LinearLayout>
+</FrameLayout>

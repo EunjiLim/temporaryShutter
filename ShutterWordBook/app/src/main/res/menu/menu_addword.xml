@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context="org.androidtown.shutterwordbook.Fragment.DictionaryFragment"
+ >
+    <item android:id="@+id/addword" android:title="단어 추가"
+        android:orderInCategory="100" app:showAsAction="never"
+
+        />
+</menu>
