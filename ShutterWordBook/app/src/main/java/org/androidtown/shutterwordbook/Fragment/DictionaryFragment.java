@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.zip.GZIPInputStream;
 
 public class DictionaryFragment extends Fragment implements View.OnClickListener, TextToSpeech.OnInitListener {
     // DB
@@ -80,8 +81,9 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
     private static final String TAG = "SimpleAndroidOCR.java";
 
     //사진이 저장될 경로
+    //외부 저장소의 최상위 경로를
     public static final String DATA_PATH = Environment
-            .getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/";
+            .getExternalStorageDirectory().getAbsolutePath().toString() + "/SimpleAndroidOCR/";
 
     // You should have the trained data file in assets folder
     // You can get them at:
@@ -107,8 +109,10 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        Log.v(TAG, "************************DATA_PATH : " + DATA_PATH);
         View rootView =  inflater.inflate(R.layout.fragment_dictionary, container, false);
 
+        Log.v(TAG,  isExternalStorageWritable() );
         // 레이아웃 연결
         buttonCamera = (Button) rootView.findViewById(R.id.button_camera);
         buttonSearch = (Button) rootView.findViewById(R.id.button_search);
@@ -141,6 +145,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
 
         for (String path : paths) {
             File dir = new File(path);
+            Log.v(TAG, "path 는??? " + path );
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
                     Log.v(TAG, "ERROR: Creation of directory " + path + " on sdcard failed");
@@ -154,11 +159,19 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         // You can get them at:
         // http://code.google.com/p/tesseract-ocr/downloads/list
         // This area needs work and optimization
+/*        File train = new File(DATA_PATH+ "tessdata/" + lang + ".traineddata");
+        if(train.exists()){
+            Log.v(TAG,"train.exists() true");
+        } else
+           Log.v(TAG,"train.exists() false");*/
+
         if (!(new File(DATA_PATH + "tessdata/" + lang + ".traineddata")).exists()) {
             try {
-
+                Log.v(TAG,"if문 안에 들어옴  !(new File(DATA_PATH, 어쩌고저쩌고).exists()");
                 AssetManager assetManager = getActivity().getAssets();
+                Log.v(TAG,"1");
                 InputStream in = assetManager.open("tessdata/" + lang + ".traineddata");
+                Log.v(TAG,"2");
                 //GZIPInputStream gin = new GZIPInputStream(in);
                 OutputStream out = new FileOutputStream(DATA_PATH
                         + "tessdata/" + lang + ".traineddata");
@@ -166,7 +179,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
                 // Transfer bytes from in to out
                 byte[] buf = new byte[1024];
                 int len;
-                //while ((lenf = gin.read(buff)) > 0) {
+                //while ((len = gin.read(buf)) > 0) {
                 while ((len = in.read(buf)) > 0) {
                     out.write(buf, 0, len);
                 }
@@ -328,6 +341,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
     //camera 버튼 눌렀을 때
     public void camera(){
 
+        Log.v(TAG,_path);
         File file = new File(_path);
 
         //Uri는 자원에 접근하기 위한 주소이다.
@@ -452,10 +466,6 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
     protected void onPhotoTaken() {
         _taken = true;
 
-        /**
-         *        크롭하기 전 사진 rotate를 잡아준다.
-         */
-
         //읽어들이려는 이미지 정보를 알아내기 위한 객체
         BitmapFactory.Options options = new BitmapFactory.Options();
         //이미지의 해상도를 몇분의 1로 줄일 지를 나타낸다. (1/4)
@@ -547,6 +557,15 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             tts.shutdown();
         }
         super.onDestroy();
+    }
+
+    public String isExternalStorageWritable(){
+        String state = Environment.getExternalStorageState();
+        if( Environment.MEDIA_MOUNTED.equals( state)){
+            return "true";
+
+        }
+        return "false";
     }
 
 

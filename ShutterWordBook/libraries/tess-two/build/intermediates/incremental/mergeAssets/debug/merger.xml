@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Eunji\Documents\ShutterWordBook3\ShutterWordBook\libraries\tess-two\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\Eunji\Documents\ShutterWordBook3\ShutterWordBook\libraries\tess-two\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Eunji\Documents\temporaryShutter\ShutterWordBook\libraries\tess-two\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\Eunji\Documents\temporaryShutter\ShutterWordBook\libraries\tess-two\src\debug\assets"/></dataSet></merger>
